@@ -48,14 +48,14 @@ if __name__ == "__main__":
                               \Grinding grandoreiro!\
     """)
     
+    mkdir(projects)
+    mkdir(output_directory)
 
     parser = argparse.ArgumentParser()
     parser.add_argument("sample", help="Name of the sample inside ./samples/ to extract")
     args = parser.parse_args()
     
     
-    mkdir(projects)
-    mkdir(output_directory)
     
     # Check if dark is installed
     if not os.path.isfile(dark):
@@ -123,7 +123,7 @@ if __name__ == "__main__":
     # Get best dll candidate from step01, not aicustact.dll!
     for (dp, dn, fn) in os.walk(step01):
         for dir_file in fn:
-            if dir_file.endswith("dll"):
+            if dir_file.find("dll") is not -1:
                 if not "aicustact" in dir_file:
                     dll = (f"{dp}/{dir_file}")
                     dll_name = (f"{dir_file}")
