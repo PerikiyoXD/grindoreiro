@@ -2,8 +2,8 @@ import sys
 import re
 import argparse
 
-chars = br"A-Za-z0-9/\-:.,_$%'()[\]<> "
-chars2 = r"A-Za-z0-9/\-:.,_$%'()[\]<> "
+chars = br"A-Za-z0-9+/=/\-:.,_$%'()[\]<> "
+chars2 = r"A-Za-z0-9+/=/\-:.,_$%'()[\]<> "
 shortest_run = 4
 
 regexp = b'[%s]{%d,}' % (chars, shortest_run)

@@ -14,6 +14,8 @@ dark = "./tools/wix/dark.exe"
 # Project (file) path
 projects = "./samples/"
 
+output_directory = "./output/"
+
 
 def mkdir(nam):
     try:
@@ -53,6 +55,13 @@ if __name__ == "__main__":
     
     
     mkdir(projects)
+    mkdir(output_directory)
+    
+    # Check if dark is installed
+    if not os.path.isfile(dark):
+        print(f"Error: dark.exe wasn't found @ '{dark}'. Please, download WiX and try again")
+        sys.exit(1)
+    
     
     # Input file name from projects directory
     project_file_name = f"{projects}{args.sample}"
@@ -215,7 +224,14 @@ if __name__ == "__main__":
     print(f"> Extracting...")
     mkdir(step05)
     extract_contents(f"{step04}decoded.zip", step05)
- 
+    
+    for (dp, dn, fn) in os.walk(step05):
+        for dir_file in fn:
+            if dir_file.endswith("exe"):
+                executable = dir_file
+    
+    shutil.copy(f"{step05}{executable}" , f"{output_directory}{executable}")
+    
     print("Finished.")
     
     
